@@ -1,72 +1,112 @@
-# Reading Academy — Compact Edition
+# Reading Academy — Compact Edition v2
 
-## Course promise
+## Что изменилось
 
-This is an **8 × 30-minute decoding course** for a young learner of English working 1:1 with a tutor. It is designed to strengthen a reliable reading strategy, not to claim complete mastery of English orthography in four hours.
+Курс рассчитан на **8 занятий по 30 минут** для индивидуальной работы «1 ученик + tutor». Объяснения и методические подсказки на сайте даны по-русски, а целевой материал для чтения остаётся на естественном английском.
 
-Core routine:
+В каждом уроке **2 из 6 этапов — интерактивные игровые задания**. Это 9 минут из 30, то есть примерно **30% Core Route**. Игры не добавлены «для красоты»: каждая механика привязана к конкретному reading subskill.
 
-**hear → map → blend → read → check meaning → retrieve**
+- `Review` — retrieval practice без игры;
+- `Notice` — guided noticing / modelling;
+- `Blend` — explicit decoding practice;
+- `Play` — **GAME 1**, controlled interactive practice;
+- `Read` — short text + comprehension evidence;
+- `Exit` — **GAME 2**, retrieval / spelling recall.
 
-The site follows a systematic synthetic phonics logic: explicit grapheme–phoneme correspondences, left-to-right blending, segmenting/recall, cumulative review, and short decodable or highly controlled texts.
+## Методическая рамка
 
-## 30-minute lesson rhythm
+Курс сочетает:
 
-- Review — 3 min
-- Notice — 5 min
-- Blend — 7 min
-- Play / controlled practice — 6 min
-- Read — 6 min
-- Exit recall — 3 min
+- systematic synthetic phonics;
+- explicit grapheme–phoneme mapping;
+- left-to-right blending;
+- cumulative review и spaced recycling;
+- controlled → less controlled progression;
+- короткие decodable / highly controlled texts;
+- comprehension после decoding, а не вместо него;
+- meaningful feedback, hints и retry;
+- спокойное отсутствие жизней, тайм-штрафов и стыда за ошибку.
 
-Stop after the Core Route. Extra Practice is optional.
+Это соответствует CELTA-oriented принципам ясной цели этапа, graded task difficulty, scaffolding, checking understanding и learner-centred feedback. Cambridge используется как ориентир по уровню Pre-A1, детскому task design и переходу от распознавания к чтению короткого текста, но курс **не является официальным продуктом Cambridge**.
 
-## Course sequence
+## Игровые механики
 
-1. **First code** — s, a, t, p, i, n, m; pure sounds; first CVC blending.
-2. **Five short vowels** — a/e/i/o/u contrasts in simple words.
-3. **Two letters, one sound** — sh, ch, th, ng, ck.
-4. **Smooth blending** — adjacent consonants; no inserted vowels; w/v clinic.
-5. **Magic e switch** — a_e, i_e, o_e, u_e.
-6. **Vowel teams I** — ee/ea and ai/ay.
-7. **Vowel teams II** — oa/ow and the two common oo sounds.
-8. **Real reader mission** — common exception/heart words, fluency, meaning and a Pre-A1-style transfer task.
+Игровая часть намеренно разнообразна, чтобы ребёнок не выполнял один и тот же multiple choice восемь уроков подряд.
 
-## Tutor technique
+1. **Code Lock** — decoding sound chain → word choice.
+2. **Vowel Switch** — categorising по short-vowel sound.
+3. **Digraph Memory** — memory matching: word ↔ grapheme.
+4. **Sound Scanner** — phoneme counting, а не letter counting.
+5. **Word Transformer** — short vowel → split digraph transformation.
+6. **Pattern Port** — spelling-pattern categorisation.
+7. **Sound Islands** — word sorting по spelling + sound.
+8. **Reader Rescue** — cumulative code analysis и exception-word noticing.
+9. **Mystery Word Vault** — общий финальный retrieval game: увидеть → спрятать → восстановить spelling.
 
-### Pure consonants
-Avoid adding a schwa to consonants during early blending. Model /s/, /t/, /p/, not “suh”, “tuh”, “puh”.
+### Методическое правило игры
 
-### When the child is stuck
-1. Wait 3–5 seconds.
-2. Ask the child to point to the spelling unit.
-3. Model only the difficult sound or grapheme.
-4. Blend the word again left to right.
-5. Reread the whole sentence for meaning.
+Игровая механика считается удачной только если для успешного действия ребёнок обязан выполнить языковую операцию: прочитать, различить звук, сопоставить grapheme–phoneme, blended word, сегментировать или восстановить spelling.
 
-Do not give the whole word as the first rescue strategy.
+Если ребёнок может выиграть, не читая, механику нужно считать декоративной и не использовать.
 
-### Digraphs and clusters
-A digraph can represent one phoneme (e.g. sh /ʃ/). Adjacent consonants are separate phonemes (e.g. st = /s/ + /t/). Do not teach clusters as if they were new single sounds.
+## Как вести 30-минутный урок
 
-### Russian-speaker priorities
-- avoid inserted vowels inside clusters (stop, black);
-- contrast /w/ and /v/;
-- teach tongue placement and voicing for /θ/ and /ð/;
-- keep short vowels distinct rather than mapping them onto Russian categories;
-- do not add /g/ after /ŋ/ in words such as sing.
+### 1. Повтор — 3 минуты
 
-### Exception / heart words
-Use phonics first. In an exception word, identify regular grapheme–phoneme links and draw attention only to the surprising part. Avoid teaching every high-frequency word as an unanalyzed visual shape.
+Не переобъяснять сразу. Дать 3–5 секунд на самостоятельный retrieval. Если ребёнок угадывает знакомое слово, попросить провести пальцем по spelling units и декодировать заново.
+
+### 2. Notice — 5 минут
+
+Учитель даёт короткую естественную British English модель. Ребёнок повторяет 1–2 раза, показывает grapheme и произносит sound. IPA используется как карта учителя, а не как набор символов для детского заучивания.
+
+### 3. Blend — 7 минут
+
+Работаем слева направо:
+
+**sound → blend → word → meaning**.
+
+Если ребёнок застрял, моделируем только трудную часть, а не называем целое слово.
+
+### 4. Interactive Play — 6 минут
+
+Это controlled practice в игровом формате. После правильного ответа полезно спросить:
+
+- «Как ты понял(а)?»
+- «Покажи буквенный код.»
+- «Какой звук здесь работает?»
+
+### 5. Read — 6 минут
+
+Первое чтение — точное. Второе — более плавное. Вопрос на понимание задаётся после decoding. Ответ желательно подтверждать предложением из текста.
+
+### 6. Exit game — 3 минуты
+
+Mystery Word Vault переводит recognition в recall. Более сильный вариант: tutor произносит слово, ребёнок сегментирует и записывает его без предварительного показа.
+
+## Особые трудности русскоговорящих детей
+
+Приоритетно отслеживать:
+
+- лишний schwa после согласных: /t/ → «тэ/та»;
+- вставленный гласный в clusters: `stop` → «сэ-топ»;
+- смешение /w/ и /v/;
+- недостаточно точную артикуляцию /θ/ и /ð/;
+- подмену английских short vowels русскими категориями;
+- добавление /g/ после /ŋ/ в `sing`;
+- попытку угадывать слово по контексту вместо decoding.
+
+## Correction sequence
+
+1. Подожди 3–5 секунд.
+2. Попроси показать проблемный spelling unit.
+3. Дай модель только этого sound / grapheme.
+4. Ребёнок снова склеивает слово слева направо.
+5. Перечитайте всю фразу для смысла.
+
+## Core Route и Extra Practice
+
+Если прошло 30 минут — урок заканчивается после Core Route. Extra Practice предназначен для сильного ученика, домашнего повторения или следующего занятия. Не нужно выполнять всё только потому, что оно есть на странице.
 
 ## Assessment
 
-The start check is a placement aid only. The final lesson checks transfer through a short text and one-word response. It is not an official Cambridge assessment.
-
-## Evidence base used in the redesign
-
-- Education Endowment Foundation: phonics teaching should be explicit and systematic; synthetic phonics has a strong evidence base.
-- UK Department for Education, *The reading framework*: systematic synthetic phonics, left-to-right blending, cumulative practice and closely matched decodable text.
-- Cambridge English Pre A1 Starters / Young Learners guidance: short, motivating reading-and-writing tasks, familiar topics, accurate spelling, picture/story comprehension and digital child-friendly task design.
-
-This course is Cambridge/CEFR-oriented in **level, task demand and learner experience**. It is not an official Cambridge product or an official Cambridge phonics programme.
+Стартовая диагностика нужна только для placement внутри курса. Финальный урок проверяет перенос навыка в короткий Pre-A1 text и one-word response. Это не официальный экзаменационный материал Cambridge.
