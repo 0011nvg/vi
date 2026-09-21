@@ -5,14 +5,14 @@ const LESSONS = [
   sounds:[{g:"s",p:"/s/",cue:"как шипение змеи — без добавочного гласного"},{g:"a",p:"/æ/",cue:"короткий открытый звук, как в cat"},{g:"t",p:"/t/",cue:"короткий звук кончиком языка — не «тэ» и не «та»"},{g:"p",p:"/p/",cue:"короткий воздушный толчок — не «пэ»"},{g:"i",p:"/ɪ/",cue:"короткий расслабленный звук, как в sit"},{g:"n",p:"/n/",cue:"голос идёт через нос"},{g:"m",p:"/m/",cue:"губы вместе, голос продолжается"}],
   clinic:"На старте особенно важно не добавлять после согласных лишний гласный. /s/, /t/, /p/ произносим коротко и чисто: добавочный звук мешает ребёнку склеивать слово.",
   blend:[{w:"sat",parts:"s • a • t",m:"сидел / сесть (форма sat)"},{w:"pin",parts:"p • i • n",m:"булавка"},{w:"tap",parts:"t • a • p",m:"постучать"},{w:"tin",parts:"t • i • n",m:"жестяная банка"},{w:"nap",parts:"n • a • p",m:"короткий сон"}],
-  practice:{type:"choice",title:"Code Lock · Кодовый замок",gameNote:"Открой код: прочитай звуковую дорожку и выбери слово.",items:[
-    {p:"s • a • t",o:["sat","sit","tap"],a:"sat",h:"Веди пальцем слева направо и не растягивай паузы между звуками."},
-    {p:"p • i • n",o:["pan","pin","tin"],a:"pin",h:"Середина слова — короткий /ɪ/."},
-    {p:"t • a • p",o:["tap","tip","sat"],a:"tap",h:"Не угадывай слово целиком. Склей три звука."}
+  practice:{type:"choice",title:"Picture Code · Фраза и смысл",gameNote:"Прочитай фразу и выбери, что она значит.",items:[
+    {p:"Sam sat.",o:["Сэм сел.","Сэм спит.","Сэм бежит."],a:"Сэм сел.",h:"Прочитай sat целиком."},
+    {p:"A pin is in a tin.",o:["Булавка в банке.","Банка на столе.","Булавка на карте."],a:"Булавка в банке.",h:"Найди знакомые pin и tin."},
+    {p:"Tim can tap.",o:["Тим может постучать.","Тим может сидеть.","Тим может спать."],a:"Тим может постучать.",h:"Прочитай последнее слово tap."}
   ]},
-  vocab:[{w:"pin",ru:"булавка",icon:"📌"},{w:"tin",ru:"банка",icon:"🥫"},{w:"nap",ru:"короткий сон",icon:"😴"},{w:"sit",ru:"сидеть",icon:"🪑"}], phrases:[{"t":"Sam sat.","ru":"Сэм сел.","icon":"🧒🪑"},{"t":"A pin is in a tin.","ru":"Булавка в банке.","icon":"📌🥫"},{"t":"Tim can tap.","ru":"Тим может постучать.","icon":"👦👆"}], secret:"A pin is in a tin.", story:["A pin is in a tin.","Tim sat.","Sam sat."], patterns:[],
+  vocab:[{w:"pin",ru:"булавка",icon:"📌"},{w:"tin",ru:"банка",icon:"🥫"},{w:"nap",ru:"короткий сон",icon:"😴"},{w:"sit",ru:"сидеть",icon:"🪑"}], phrases:[{"t":"Sam sat.","ru":"Сэм сел.","icon":"🧒🪑"},{"t":"A pin is in a tin.","ru":"Булавка в банке.","icon":"📌🥫"},{"t":"Tim can tap.","ru":"Тим может постучать.","icon":"👦👆"}], secret:"A pin is in a tin.", story:[{t:"A pin is in a tin.",ru:"Булавка в банке."},{t:"Tim sat.",ru:"Тим сел."},{t:"Sam sat.",ru:"Сэм сел."}], patterns:[],
   comprehension:{q:"Where is the pin?",o:["in a tin","on Sam","in a bag"],a:"in a tin"},
-  flash:["sat","pin","tin","nap"], extra:"Прочитай: sip · pit · pan · pat · tan · tip. Затем попроси учителя составить из знакомых слов смешную короткую фразу."
+  flash:["sat","pin","tin","nap"], extra:"Ещё слова: <b>map</b> — карта 🗺️ · <b>mat</b> — коврик 🟫 · <b>pan</b> — сковорода 🍳 · <b>tip</b> — кончик 📍 · <b>sip</b> — глоток 🥤 · <b>pit</b> — косточка 🫘."
 },
 {
   title:"Короткие гласные · Short vowels", focus:"a · e · i · o · u", outcome:"Я различаю и читаю пять частых коротких гласных в простых словах.",
@@ -23,9 +23,9 @@ const LESSONS = [
   practice:{type:"sort",title:"Vowel Switch · Переключатель гласных",gameNote:"Перетащи смыслом, а не угадыванием: прочитай слово и отправь его к правильному гласному.",buckets:["a /æ/","e /e/","i /ɪ/","o /ɒ/","u /ʌ/"],items:[
     {w:"cat",c:"a /æ/"},{w:"pen",c:"e /e/"},{w:"pig",c:"i /ɪ/"},{w:"dog",c:"o /ɒ/"},{w:"sun",c:"u /ʌ/"},{w:"bed",c:"e /e/"},{w:"cup",c:"u /ʌ/"},{w:"hot",c:"o /ɒ/"},{w:"map",c:"a /æ/"},{w:"sit",c:"i /ɪ/"}
   ]},
-  vocab:[{w:"cat",ru:"кот",icon:"🐱"},{w:"pen",ru:"ручка",icon:"🖊️"},{w:"pig",ru:"свинья",icon:"🐷"},{w:"dog",ru:"собака",icon:"🐶"},{w:"sun",ru:"солнце",icon:"☀️"}], phrases:[{"t":"A cat is on a mat.","ru":"Кот на коврике.","icon":"🐱"},{"t":"A dog is in the sun.","ru":"Собака на солнце.","icon":"🐶☀️"},{"t":"A pig is in a pen.","ru":"Свинья в загоне.","icon":"🐷"}], secret:"The cat is in the sun.", story:["The cat is on a red mat.","A dog is in the sun.","The pig is in a pen."],patterns:[],
+  vocab:[{w:"cat",ru:"кот",icon:"🐱"},{w:"pen",ru:"ручка",icon:"🖊️"},{w:"pig",ru:"свинья",icon:"🐷"},{w:"dog",ru:"собака",icon:"🐶"},{w:"sun",ru:"солнце",icon:"☀️"}], phrases:[{"t":"A cat is on a mat.","ru":"Кот на коврике.","icon":"🐱"},{"t":"A dog is in the sun.","ru":"Собака на солнце.","icon":"🐶☀️"},{"t":"A pig is in a pen.","ru":"Свинья в загоне.","icon":"🐷"}], secret:"The cat is in the sun.", story:[{t:"The cat is on a red mat.",ru:"Кот на красном коврике."},{t:"A dog is in the sun.",ru:"Собака на солнце."},{t:"The pig is in a pen.",ru:"Свинья в загоне."}], patterns:[],
   comprehension:{q:"Which animal is in a pen?",o:["the cat","the dog","the pig"],a:"the pig"},
-  flash:["cat","pen","dog","sun"], extra:"Прочитай цепочку cat → cap → cup → pup → pop. После каждого шага скажи, что именно изменилось: одна буква, один звук или оба."
+  flash:["cat","pen","dog","sun"], extra:"Ещё слова: <b>bed</b> — кровать 🛏️ · <b>cup</b> — чашка ☕ · <b>hot</b> — горячий ♨️ · <b>map</b> — карта 🗺️ · <b>sit</b> — сидеть 🪑."
 },
 {
   title:"Две буквы — один звук", focus:"sh · ch · th · ng · ck", outcome:"Я узнаю частые диграфы и читаю их как одну звуковую единицу.",
@@ -36,9 +36,9 @@ const LESSONS = [
   practice:{type:"memory",title:"Digraph Memory · Память диграфов",gameNote:"Открой две карточки. Пара засчитывается, если слово совпадает с его буквенным кодом.",pairs:[
     {word:"ship",code:"sh"},{word:"chip",code:"ch"},{word:"thin",code:"th"},{word:"sing",code:"ng"},{word:"duck",code:"ck"}
   ]},
-  vocab:[{w:"ship",ru:"корабль",icon:"🚢"},{w:"chip",ru:"чип / кусочек",icon:"🍟"},{w:"fish",ru:"рыба",icon:"🐟"},{w:"duck",ru:"утка",icon:"🦆"},{w:"sock",ru:"носок",icon:"🧦"}], phrases:[{"t":"A fish is in the dish.","ru":"Рыба на блюде.","icon":"🐟🍽️"},{"t":"The duck has a sock.","ru":"У утки есть носок.","icon":"🦆🧦"},{"t":"The ship is big.","ru":"Корабль большой.","icon":"🚢"}], secret:"The duck has a red sock.", story:["This duck is in the shop.","The duck has a red sock.","A fish is in the dish."],patterns:["sh","ch","th","ng","ck"],
+  vocab:[{w:"ship",ru:"корабль",icon:"🚢"},{w:"chip",ru:"чип / кусочек",icon:"🍟"},{w:"fish",ru:"рыба",icon:"🐟"},{w:"duck",ru:"утка",icon:"🦆"},{w:"sock",ru:"носок",icon:"🧦"}], phrases:[{"t":"A fish is in the dish.","ru":"Рыба на блюде.","icon":"🐟🍽️"},{"t":"The duck has a sock.","ru":"У утки есть носок.","icon":"🦆🧦"},{"t":"The ship is big.","ru":"Корабль большой.","icon":"🚢"}], secret:"The duck has a red sock.", story:[{t:"This duck is in the shop.",ru:"Эта утка в магазине."},{t:"The duck has a red sock.",ru:"У утки красный носок."},{t:"A fish is in the dish.",ru:"Рыба на блюде."}], patterns:["sh","ch","th","ng","ck"],
   comprehension:{q:"What does the duck have?",o:["a red sock","a fish","a chip"],a:"a red sock"},
-  flash:["ship","thin","sing","duck"], extra:"Произнеси thin / this / thin / this и положи пальцы на горло. Где появляется голос? Объясни учителю одним коротким правилом."
+  flash:["ship","thin","sing","duck"], extra:"Ещё слова: <b>shop</b> — магазин 🏪 · <b>chin</b> — подбородок 🙂 · <b>ring</b> — кольцо 💍 · <b>back</b> — спина 🔙 · <b>shell</b> — ракушка 🐚."
 },
 {
   title:"Плавное склеивание", focus:"st · sp · bl · cl · fl · gr + w/v", outcome:"Я склеиваю соседние согласные без вставленного гласного.",
@@ -52,9 +52,9 @@ const LESSONS = [
     {p:"fish",o:["3 sounds","4 sounds","5 sounds"],a:"3 sounds",h:"sh — один звук."},
     {p:"spin",o:["3 sounds","4 sounds","5 sounds"],a:"4 sounds",h:"s и p остаются двумя отдельными звуками."}
   ]},
-  vocab:[{w:"frog",ru:"лягушка",icon:"🐸"},{w:"swim",ru:"плавать",icon:"🏊"},{w:"clap",ru:"хлопать",icon:"👏"},{w:"black",ru:"чёрный",icon:"⬛"},{w:"stop",ru:"остановиться",icon:"🛑"}], phrases:[{"t":"A frog can swim.","ru":"Лягушка умеет плавать.","icon":"🐸🏊"},{"t":"Clap and stop.","ru":"Хлопни и остановись.","icon":"👏🛑"},{"t":"The frog is black.","ru":"Лягушка чёрная.","icon":"🐸⬛"}], secret:"A black frog can swim.", story:["A black frog is on a flat log.","It can swim.","It slips and drops in."],patterns:["st","sp","bl","cl","fl","gr"],
+  vocab:[{w:"frog",ru:"лягушка",icon:"🐸"},{w:"swim",ru:"плавать",icon:"🏊"},{w:"clap",ru:"хлопать",icon:"👏"},{w:"black",ru:"чёрный",icon:"⬛"},{w:"stop",ru:"остановиться",icon:"🛑"}], phrases:[{"t":"A frog can swim.","ru":"Лягушка умеет плавать.","icon":"🐸🏊"},{"t":"Clap and stop.","ru":"Хлопни и остановись.","icon":"👏🛑"},{"t":"The frog is black.","ru":"Лягушка чёрная.","icon":"🐸⬛"}], secret:"A black frog can swim.", story:[{t:"A black frog is on a flat log.",ru:"Чёрная лягушка на плоском бревне."},{t:"It can swim.",ru:"Она умеет плавать."},{t:"It slips and drops in.",ru:"Она скользит и падает в воду."}], patterns:["st","sp","bl","cl","fl","gr"],
   comprehension:{q:"Where is the frog first?",o:["on a flat log","in a shop","on a bus"],a:"on a flat log"},
-  flash:["stop","black","clap","swim"], extra:"Мини-клиника W/V: прочитай win · van · wet · vet. Попроси учителя закрыть нижнюю часть лица листом: можешь ли ты услышать разницу без визуальной подсказки?"
+  flash:["stop","black","clap","swim"], extra:"Ещё слова: <b>flag</b> — флаг 🚩 · <b>glass</b> — стакан 🥛 · <b>step</b> — шаг 👣 · <b>spin</b> — крутиться 🌀 · <b>flat</b> — плоский ▰."
 },
 {
   title:"Magic e · переключатель гласной", focus:"a_e · i_e · o_e · u_e", outcome:"Я узнаю частый шаблон с финальной e и меняю чтение гласной.",
@@ -68,9 +68,9 @@ const LESSONS = [
     {from:"hop",to:"hope",options:["hope","heap","hip"],hint:"Ищи шаблон o_e."},
     {from:"cub",to:"cube",options:["cube","cob","cab"],hint:"Ищи шаблон u_e."}
   ]},
-  vocab:[{w:"bike",ru:"велосипед",icon:"🚲"},{w:"kite",ru:"воздушный змей",icon:"🪁"},{w:"home",ru:"дом",icon:"🏠"},{w:"cube",ru:"куб",icon:"🧊"},{w:"game",ru:"игра",icon:"🎲"}], phrases:[{"t":"Mike has a bike.","ru":"У Майка есть велосипед.","icon":"👦🚲"},{"t":"The kite is red.","ru":"Змей красный.","icon":"🪁🔴"},{"t":"Go home.","ru":"Иди домой.","icon":"🏠"}], secret:"Mike has a red kite.", story:["Mike has a bike.","He can ride home.","He has a red kite."],patterns:["a_e","i_e","o_e","u_e"],
+  vocab:[{w:"bike",ru:"велосипед",icon:"🚲"},{w:"kite",ru:"воздушный змей",icon:"🪁"},{w:"home",ru:"дом",icon:"🏠"},{w:"cube",ru:"куб",icon:"🧊"},{w:"game",ru:"игра",icon:"🎲"}], phrases:[{"t":"Mike has a bike.","ru":"У Майка есть велосипед.","icon":"👦🚲"},{"t":"The kite is red.","ru":"Змей красный.","icon":"🪁🔴"},{"t":"Go home.","ru":"Иди домой.","icon":"🏠"}], secret:"Mike has a red kite.", story:[{t:"Mike has a bike.",ru:"У Майка есть велосипед."},{t:"He can ride home.",ru:"Он может ехать домой."},{t:"He has a red kite.",ru:"У него красный воздушный змей."}], patterns:["a_e","i_e","o_e","u_e"],
   comprehension:{q:"What is red?",o:["the bike","the kite","the home"],a:"the kite"},
-  flash:["game","bike","home","cube"], extra:"Прочитай пары tap/tape · rid/ride · hop/hope. Затем объясни учителю по-русски, что именно делает финальная e в этих примерах."
+  flash:["game","bike","home","cube"], extra:"Ещё слова: <b>name</b> — имя 🪪 · <b>cake</b> — торт 🎂 · <b>ride</b> — ехать 🚲 · <b>nose</b> — нос 👃 · <b>cute</b> — милый 🥰."
 },
 {
   title:"Команды гласных I", focus:"ee / ea · ai / ay", outcome:"Я узнаю два частых способа записать /iː/ и /eɪ/.",
@@ -81,9 +81,9 @@ const LESSONS = [
   practice:{type:"sort",title:"Pattern Port · Порт шаблонов",gameNote:"Каждое слово должно пришвартоваться к своему буквосочетанию.",buckets:["ee","ea","ai","ay"],items:[
     {w:"see",c:"ee"},{w:"tree",c:"ee"},{w:"green",c:"ee"},{w:"read",c:"ea"},{w:"eat",c:"ea"},{w:"team",c:"ea"},{w:"rain",c:"ai"},{w:"paint",c:"ai"},{w:"day",c:"ay"},{w:"play",c:"ay"},{w:"stay",c:"ay"}
   ]},
-  vocab:[{w:"green",ru:"зелёный",icon:"🟢"},{w:"rain",ru:"дождь",icon:"🌧️"},{w:"read",ru:"читать",icon:"📖"},{w:"play",ru:"играть",icon:"🎮"},{w:"team",ru:"команда",icon:"👥"}], phrases:[{"t":"We play in the rain.","ru":"Мы играем под дождём.","icon":"🎮🌧️"},{"t":"Read with the team.","ru":"Читай с командой.","icon":"📖👥"},{"t":"The tree is green.","ru":"Дерево зелёное.","icon":"🌳🟢"}], secret:"They read and play.", story:["It is a rainy day.","Mia and Lee stay in.","They read and play a game."],patterns:["ee","ea","ai","ay"],
+  vocab:[{w:"green",ru:"зелёный",icon:"🟢"},{w:"rain",ru:"дождь",icon:"🌧️"},{w:"read",ru:"читать",icon:"📖"},{w:"play",ru:"играть",icon:"🎮"},{w:"team",ru:"команда",icon:"👥"}], phrases:[{"t":"We play in the rain.","ru":"Мы играем под дождём.","icon":"🎮🌧️"},{"t":"Read with the team.","ru":"Читай с командой.","icon":"📖👥"},{"t":"The tree is green.","ru":"Дерево зелёное.","icon":"🌳🟢"}], secret:"They read and play.", story:[{t:"It is a rainy day.",ru:"Дождливый день."},{t:"Mia and Lee stay in.",ru:"Миа и Ли остаются дома."},{t:"They read and play a game.",ru:"Они читают и играют в игру."}], patterns:["ee","ea","ai","ay"],
   comprehension:{q:"What do Mia and Lee do?",o:["read and play","ride a bike","go on a boat"],a:"read and play"},
-  flash:["green","read","rain","play"], extra:"Сделай на бумаге две колонки: /iː/ и /eɪ/. Добавь в каждую по три слова из урока, а затем прочитай их без подсказки."
+  flash:["green","read","rain","play"], extra:"Ещё слова: <b>tree</b> — дерево 🌳 · <b>eat</b> — есть 🍽️ · <b>paint</b> — рисовать 🎨 · <b>day</b> — день 🌞 · <b>stay</b> — оставаться 🏠."
 },
 {
   title:"Команды гласных II", focus:"oa / ow · oo /uː/ /ʊ/", outcome:"Я читаю частые варианты /əʊ/ и проверяю, какой звук oo нужен в знакомом слове.",
@@ -94,9 +94,9 @@ const LESSONS = [
   practice:{type:"sort",title:"Sound Islands · Острова звуков",gameNote:"Прочитай слово и отправь его на правильный «остров» по написанию и звучанию.",buckets:["oa /əʊ/","ow /əʊ/","oo /uː/","oo /ʊ/"],items:[
     {w:"boat",c:"oa /əʊ/"},{w:"coat",c:"oa /əʊ/"},{w:"road",c:"oa /əʊ/"},{w:"snow",c:"ow /əʊ/"},{w:"show",c:"ow /əʊ/"},{w:"yellow",c:"ow /əʊ/"},{w:"moon",c:"oo /uː/"},{w:"food",c:"oo /uː/"},{w:"room",c:"oo /uː/"},{w:"book",c:"oo /ʊ/"},{w:"look",c:"oo /ʊ/"},{w:"good",c:"oo /ʊ/"}
   ]},
-  vocab:[{w:"boat",ru:"лодка",icon:"⛵"},{w:"snow",ru:"снег",icon:"❄️"},{w:"moon",ru:"луна",icon:"🌙"},{w:"book",ru:"книга",icon:"📕"},{w:"coat",ru:"пальто",icon:"🧥"}], phrases:[{"t":"The boat is on the sea.","ru":"Лодка на море.","icon":"⛵🌊"},{"t":"Look at the moon.","ru":"Посмотри на луну.","icon":"👀🌙"},{"t":"The coat is yellow.","ru":"Пальто жёлтое.","icon":"🧥🟡"}], secret:"Look at the moon.", story:["Joe has a yellow coat.","He goes on a boat.","He looks at the moon."],patterns:["oa","ow","oo"],
+  vocab:[{w:"boat",ru:"лодка",icon:"⛵"},{w:"snow",ru:"снег",icon:"❄️"},{w:"moon",ru:"луна",icon:"🌙"},{w:"book",ru:"книга",icon:"📕"},{w:"coat",ru:"пальто",icon:"🧥"}], phrases:[{"t":"The boat is on the sea.","ru":"Лодка на море.","icon":"⛵🌊"},{"t":"Look at the moon.","ru":"Посмотри на луну.","icon":"👀🌙"},{"t":"The coat is yellow.","ru":"Пальто жёлтое.","icon":"🧥🟡"}], secret:"Look at the moon.", story:[{t:"Joe has a yellow coat.",ru:"У Джо жёлтое пальто."},{t:"He goes on a boat.",ru:"Он плывёт на лодке."},{t:"He looks at the moon.",ru:"Он смотрит на луну."}], patterns:["oa","ow","oo"],
   comprehension:{q:"What colour is Joe’s coat?",o:["yellow","green","red"],a:"yellow"},
-  flash:["boat","snow","moon","book"], extra:"Прочитай room · book · food · look. Разложи слова по двум звукам oo уже без подсказки на экране."
+  flash:["boat","snow","moon","book"], extra:"Ещё слова: <b>road</b> — дорога 🛣️ · <b>show</b> — шоу 🎭 · <b>room</b> — комната 🚪 · <b>food</b> — еда 🍲 · <b>look</b> — смотреть 👀."
 },
 {
   title:"Миссия настоящего читателя", focus:"heart words + fluency + meaning", outcome:"Я читаю короткий текст уровня Pre-A1, сначала использую phonics и узнаю небольшой набор частых исключений.",
@@ -110,8 +110,8 @@ const LESSONS = [
     {p:"Which word uses a split digraph?",o:["home","green","ship"],a:"home",h:"Ищи гласную + согласную + финальную e."},
     {p:"Which word has a digraph at the start?",o:["ship","stop","game"],a:"ship",h:"Две буквы передают один звук."}
   ]},
-  vocab:[{w:"school",ru:"школа",icon:"🏫"},{w:"book",ru:"книга",icon:"📗"},{w:"friend",ru:"друг",icon:"🧑‍🤝‍🧑"},{w:"read",ru:"читать",icon:"📖"},{w:"smile",ru:"улыбаться",icon:"😊"}], phrases:[{"t":"Read with a friend.","ru":"Читай с другом.","icon":"📖🧑‍🤝‍🧑"},{"t":"We are at school.","ru":"Мы в школе.","icon":"🏫"},{"t":"Smile and read.","ru":"Улыбнись и читай.","icon":"😊📖"}], secret:"We read with a friend.", story:["One day, Sam and Mia are at school.","Sam has a green book.","Mia said, ‘Come and read with me.’","They sit, read and smile.","It was a good day."],patterns:[],
+  vocab:[{w:"school",ru:"школа",icon:"🏫"},{w:"book",ru:"книга",icon:"📗"},{w:"friend",ru:"друг",icon:"🧑‍🤝‍🧑"},{w:"read",ru:"читать",icon:"📖"},{w:"smile",ru:"улыбаться",icon:"😊"}], phrases:[{"t":"Read with a friend.","ru":"Читай с другом.","icon":"📖🧑‍🤝‍🧑"},{"t":"We are at school.","ru":"Мы в школе.","icon":"🏫"},{"t":"Smile and read.","ru":"Улыбнись и читай.","icon":"😊📖"}], secret:"We read with a friend.", story:[{t:"One day, Sam and Mia are at school.",ru:"Однажды Сэм и Миа были в школе."},{t:"Sam has a green book.",ru:"У Сэма зелёная книга."},{t:"Mia said, ‘Come and read with me.’",ru:"Миа сказала: «Иди читать со мной»."},{t:"They sit, read and smile.",ru:"Они сидят, читают и улыбаются."},{t:"It was a good day.",ru:"Это был хороший день."}], patterns:[],
   comprehension:{q:"What does Sam have?",o:["a green book","a yellow coat","a red kite"],a:"a green book"},
-  flash:["said","one","some","school"], extra:"Transfer task в стиле Pre-A1 (не официальный материал Cambridge): перечитай текст и ответь ОДНИМ словом — Where are Sam and Mia? ________"
+  flash:["said","one","some","school"], extra:"Ещё слова: <b>good</b> — хороший 👍 · <b>green</b> — зелёный 🟢 · <b>boat</b> — лодка ⛵ · <b>kite</b> — воздушный змей 🪁 · <b>ship</b> — корабль 🚢."
 }
 ];
