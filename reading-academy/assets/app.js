@@ -6,7 +6,17 @@ const STAGES=[
 {id:"read",name:"Слова + история",short:"Story",mins:6,game:true},
 {id:"exit",name:"Секретное слово",short:"Final game",mins:3,game:true}
 ];
-const KEY="readingAcademyKids_v3";
+const KEY="readingAcademyQuest_final";
+const WORLDS=[
+ {name:"Sound Detective",icon:"🔎",tag:"CASE 01",mission:"Find the secret sounds",token:"🔍",color:"detective"},
+ {name:"Vowel Volcano",icon:"🌋",tag:"CASE 02",mission:"Save the vowel words",token:"🔥",color:"volcano"},
+ {name:"Digraph Dungeon",icon:"🏰",tag:"CASE 03",mission:"Unlock the sound doors",token:"🗝️",color:"dungeon"},
+ {name:"Blend Racetrack",icon:"🏎️",tag:"CASE 04",mission:"Blend to the finish",token:"🏁",color:"race"},
+ {name:"Magic-E Lab",icon:"✨",tag:"CASE 05",mission:"Switch the vowel power",token:"⚡",color:"magic"},
+ {name:"Pattern Port",icon:"⚓",tag:"CASE 06",mission:"Sort the spelling cargo",token:"⚓",color:"port"},
+ {name:"Sound Islands",icon:"🏝️",tag:"CASE 07",mission:"Map the sound islands",token:"🗺️",color:"islands"},
+ {name:"Reader HQ",icon:"🏆",tag:"FINAL CASE",mission:"Crack the reading code",token:"🏆",color:"hq"}
+];
 let state=load(),currentLesson=Math.min(Math.max(parseInt(location.hash.replace("#lesson-",""))||1,1),LESSONS.length),currentStage=0,tutorMode=false;
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{done:{},stages:{},currentLesson:1}}catch(e){return{done:{},stages:{},currentLesson:1}}}
 function save(){state.currentLesson=currentLesson;localStorage.setItem(KEY,JSON.stringify(state));progress()}
@@ -19,10 +29,10 @@ function progress(){
 }
 function renderMap(){
  const g=document.getElementById("courseGrid");if(!g)return;
- const names=["Sound Detective","Vowel Volcano","Digraph Dungeon","Blend Racetrack","Magic-E Lab","Pattern Port","Sound Islands","Reader HQ"];
- const icons=["🔎","🌋","🏰","🏎️","✨","⚓","🏝️","🏆"];
- g.innerHTML=LESSONS.map((l,i)=>`<button class="mission ${state.done[i+1]?"done":""}" data-open="${i+1}" type="button"><span><span class="quest-icon">${icons[i]}</span><span class="num">LEVEL ${i+1}</span><h3>${names[i]}</h3><p>${esc(l.focus)}</p></span><span class="status">${state.done[i+1]?"🏆 COMPLETED":"START QUEST →"}</span></button>`).join("");
- g.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openLesson(+b.dataset.open));
+ g.innerHTML=LESSONS.map((l,i)=>{const w=WORLDS[i],locked=i>0&&!state.done[i];
+ return `<button class="mission world-${w.color} ${state.done[i+1]?"done":""} ${locked?"locked":""}" data-open="${i+1}" type="button" ${locked?'aria-label="Уровень пока закрыт"':""}><span><span class="quest-icon">${state.done[i+1]?w.token:w.icon}</span><span class="num">${w.tag}</span><h3>${w.name}</h3><p>${w.mission}</p></span><span class="status">${state.done[i+1]?"🏆 TOKEN FOUND":locked?"🔒 COMPLETE LEVEL "+i:"PLAY QUEST →"}</span></button>`}).join("");
+ g.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>{const n=+b.dataset.open;if(n>1&&!state.done[n-1]){b.classList.add("locked-shake");setTimeout(()=>b.classList.remove("locked-shake"),500);return}openLesson(n)});
+ renderInventory();
 }
 function openLesson(n){currentLesson=n;currentStage=0;location.hash="lesson-"+n;save();renderLesson();document.getElementById("workspace").scrollIntoView({behavior:"smooth",block:"start"})}
 function completeStage(){
@@ -31,11 +41,15 @@ function completeStage(){
  currentStage++;save();renderLesson();
 }
 function tutor(text){return `<div class="tutor-note ${tutorMode?"show":""}"><b>🔒 Для учителя</b><br>${text}</div>`}
-function questName(n){return ["Sound Detective","Vowel Volcano","Digraph Dungeon","Blend Racetrack","Magic-E Lab","Pattern Port","Sound Islands","Reader HQ"][n-1]}
+function questName(n){return WORLDS[n-1].name}
+function renderInventory(){
+ let el=document.getElementById("questInventory");if(!el)return;
+ el.innerHTML=WORLDS.map((w,i)=>`<span class="token ${state.done[i+1]?"found":""}" title="${w.name}">${state.done[i+1]?w.token:"?"}</span>`).join("");
+}
 function showReward(){
- const w=document.getElementById("workspace"),all=Object.values(state.done||{}).filter(Boolean).length;
+ const w=document.getElementById("workspace"),all=Object.values(state.done||{}).filter(Boolean).length,world=WORLDS[currentLesson-1];
  const final=all===LESSONS.length;
- w.innerHTML=`<div class="reward-screen" role="status"><div class="reward-burst">${final?"🏆":"🎁"}</div><div class="reward-eyebrow">${final?"FINAL REWARD":"QUEST COMPLETE"}</div><h2>${final?"YOU ARE A READING HERO!":"LEVEL "+currentLesson+" COMPLETE!"}</h2><p>${final?"Ты прошёл все 8 квестов и собрал Reading Academy Badge!":"Ты открыл новый кусочек секретного кода чтения."}</p><div class="reward-badge">${final?"🌟 READING HERO 🌟":"⭐ SOUND STAR #"+currentLesson+" ⭐"}</div><div class="reward-actions"><button class="btn primary" id="rewardAgain" type="button">🎮 Сыграть ещё</button>${currentLesson<LESSONS.length?`<button class="btn yellow" id="rewardNext" type="button">🔓 Открыть LEVEL ${currentLesson+1}</button>`:""}</div><div class="keks-reward">🐾 <b>Кекс:</b> ${final?"«Вот это да! Теперь ты читаешь код по-настоящему!»":"«Мяу! Этот код наш. Что там в следующем уровне?»"}</div></div>`;
+ w.innerHTML=`<div class="reward-screen ${final?"final-reward":""}" role="status"><div class="confetti" aria-hidden="true">★ ✦ ● ★ ✦ ● ★</div><div class="reward-burst">${final?"🏆":world.token}</div><div class="reward-eyebrow">${final?"SECRET CODE COMPLETE":"TOKEN FOUND · "+world.tag}</div><h2>${final?"YOU ARE A READING HERO!":"QUEST COMPLETE!"}</h2><p>${final?"Все 8 секретов собраны. Reading HQ открыта!":"Ты прошёл "+world.name+" и забрал новый жетон."}</p><div class="reward-badge">${final?"🌟 READING HERO BADGE 🌟":world.token+" "+world.name.toUpperCase()+" TOKEN"}</div><div class="token-row">${WORLDS.map((x,i)=>`<span class="token ${state.done[i+1]?"found":""}">${state.done[i+1]?x.token:"?"}</span>`).join("")}</div><div class="reward-actions"><button class="btn primary" id="rewardAgain" type="button">🎮 Ещё раунд</button>${currentLesson<LESSONS.length?`<button class="btn yellow" id="rewardNext" type="button">🔓 LEVEL ${currentLesson+1}: ${WORLDS[currentLesson].name}</button>`:""}</div><div class="keks-reward"><b>Кекс:</b> ${final?"«Код собран! Теперь ты настоящий Reading Hero. Но у английского ещё полно секретов…»":"«Есть! "+world.token+" наш. Я уже вижу следующий секрет!»"}</div></div>`;
  document.getElementById("rewardAgain").onclick=()=>{currentStage=3;renderLesson()};
  const n=document.getElementById("rewardNext");if(n)n.onclick=()=>openLesson(currentLesson+1);
 }
@@ -49,7 +63,7 @@ function frame(title,lead,body,note,extra=""){
 function renderLesson(){
  const l=LESSONS[currentLesson-1],w=document.getElementById("workspace");
  const stars=STAGES.filter((s,i)=>state.stages[sk(currentLesson,i)]).length;
- w.innerHTML=`<div class="quest-strip"><span>🗺️ READING QUEST</span><b>${questName(currentLesson)}</b><span>LEVEL ${currentLesson}/8</span></div><div class="lesson-shell"><div class="lesson-hero kids-hero"><div><div class="lesson-no">LEVEL ${currentLesson} · ⭐ ${stars}/6</div><h2>${esc(l.title)}</h2><p class="kid-goal">Сегодня научимся: ${esc(l.focus)}</p></div><div class="timebox"><strong>30</strong>мин</div></div><div class="stage-nav">${STAGES.map((s,i)=>`<button class="stage-tab ${i===currentStage?"active":""} ${state.stages[sk(currentLesson,i)]?"done":""}" data-stage="${i}" type="button"><span class="stage-emoji">${["👀","👂","🧩","🎮","📚","🔐"][i]}</span>${s.name}<br><small>${s.mins} мин</small></button>`).join("")}</div><div class="stage-body" id="stageBody"></div></div>`;
+ const world=WORLDS[currentLesson-1];w.innerHTML=`<div class="quest-strip world-${world.color}"><span>${world.icon} ${world.tag}</span><b>${questName(currentLesson)}</b><span>⭐ ${stars}/6 · ${world.mission}</span></div><div class="lesson-shell"><div class="lesson-hero kids-hero"><div><div class="lesson-no">LEVEL ${currentLesson} · ⭐ ${stars}/6</div><h2>${esc(l.title)}</h2><p class="kid-goal">Сегодня научимся: ${esc(l.focus)}</p></div><div class="timebox"><strong>30</strong>мин</div></div><div class="stage-nav">${STAGES.map((s,i)=>`<button class="stage-tab ${i===currentStage?"active":""} ${state.stages[sk(currentLesson,i)]?"done":""}" data-stage="${i}" type="button"><span class="stage-emoji">${["👀","👂","🧩","🎮","📚","🔐"][i]}</span>${s.name}<br><small>${s.mins} мин</small></button>`).join("")}</div><div class="stage-body" id="stageBody"></div></div>`;
  w.querySelectorAll("[data-stage]").forEach(b=>b.onclick=()=>{currentStage=+b.dataset.stage;renderLesson()});renderStage();
 }
 function renderStage(){
@@ -73,14 +87,14 @@ function blend(l){
  return frame("Собери слово","Как пазл — только из звуков.",body,"Не называйте целое слово первым. Дайте опору только на трудном звуке.",l.extra);
 }
 function wireBlend(l){let i=0,p=document.getElementById("blendParts"),a=document.getElementById("blendAnswer"),c=document.getElementById("blendCounter");const show=()=>{p.textContent=l.blend[i].parts;a.innerHTML="<span>сначала прочитай сам</span>";c.textContent=`Слово ${i+1} из ${l.blend.length}`};document.getElementById("blendReveal").onclick=()=>a.innerHTML=`${esc(l.blend[i].w)}<small>${esc(l.blend[i].m)}</small>`;document.getElementById("blendNext").onclick=()=>{i=(i+1)%l.blend.length;show()};show()}
-function gameBanner(l){return `<div class="game-banner"><span class="game-badge">🎮 GAME</span><div><b>${esc(l.practice.title.split("·")[0])}</b><small>Читай, думай, побеждай!</small></div><span class="game-skill">⭐ +1</span></div>`}
+function gameBanner(l){const w=WORLDS[currentLesson-1];return `<div class="game-banner world-${w.color}"><span class="game-badge">${w.icon} MINI QUEST</span><div><b>${w.mission}</b><small>${esc(l.practice.title.split("·")[0])} · читай, чтобы пройти дальше!</small></div><span class="game-skill">⭐ +1</span></div>`}
 function play(l){
  let body=gameBanner(l),p=l.practice;
  if(p.type==="choice")body+=`<div class="quiz">${p.items.map((q,i)=>`<div class="qcard" data-q="${i}"><div class="qprompt">${esc(q.p)}</div><div class="qoptions">${shuffle(q.o).map(o=>`<button class="qopt" data-answer="${esc(o)}" type="button">${esc(o)}</button>`).join("")}</div><div class="feedback"></div><button class="btn small ghost hintbtn" type="button">Нужна подсказка?</button><div class="hintbox">${esc(q.h)}</div></div>`).join("")}</div>`;
  if(p.type==="sort")body+=`<div class="sort-area"><div class="sort-bank"><p>Прочитай слово, выбери его и отправь в правильную группу.</p><div class="word-row">${shuffle(p.items).map(x=>`<button class="word-chip sortword" data-cat="${esc(x.c)}" type="button">${esc(x.w)}</button>`).join("")}</div><button class="btn small" id="sortClear" type="button">Очистить / Try again</button><div class="sort-feedback" id="sortFeedback"></div></div><div class="sort-buckets">${p.buckets.map(x=>`<div class="bucket"><b>${esc(x)}</b><button class="btn small bucketbtn" data-bucket="${esc(x)}" type="button">Положить слово</button></div>`).join("")}</div></div>`;
  if(p.type==="memory"){const cards=shuffle(p.pairs.flatMap((x,i)=>[{pair:i,kind:"word",label:x.word},{pair:i,kind:"code",label:x.code}]));body+=`<div class="memory-game"><div class="memory-status" id="memoryStatus">Найди ${p.pairs.length} пар: слово + его буквенный код.</div><div class="memory-grid">${cards.map(x=>`<button class="memory-card" data-pair="${x.pair}" data-kind="${x.kind}" type="button"><span class="memory-back">?</span><span class="memory-front">${esc(x.label)}</span></button>`).join("")}</div><button class="btn small" id="memoryReset" type="button">Перемешать заново</button></div>`}
  if(p.type==="transform")body+=`<div class="transform-game">${p.items.map((q,i)=>`<div class="transform-card" data-transform="${i}"><div class="transform-from">${esc(q.from)}</div><div class="transform-arrow">+ e →</div><div class="transform-options">${shuffle(q.options).map(o=>`<button class="qopt" data-transform-answer="${esc(o)}" type="button">${esc(o)}</button>`).join("")}</div><div class="feedback"></div><button class="btn small ghost transform-hint" type="button">Нужна подсказка?</button><div class="hintbox">${esc(q.hint)}</div></div>`).join("")}</div>`;
- return frame("Игра начинается!","Готов? Поехали! 🎮",body,"Не используй скорость, жизни и штрафы. После ответа спроси: «Как ты понял(а)? Покажи код». Игра должна усиливать noticing/retrieval, а не отвлекать от языковой цели.",l.extra);
+ return frame(WORLDS[currentLesson-1].name+" Challenge","Готов? Выполни миссию и забери ⭐",body,"Не используй скорость, жизни и штрафы. После ответа спроси: «Как ты понял(а)? Покажи код». Игра должна усиливать noticing/retrieval, а не отвлекать от языковой цели.",l.extra);
 }
 function wirePlay(l){
  const p=l.practice;
