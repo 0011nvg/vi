@@ -19,12 +19,26 @@ function progress(){
 }
 function renderMap(){
  const g=document.getElementById("courseGrid");if(!g)return;
- g.innerHTML=LESSONS.map((l,i)=>`<button class="mission ${state.done[i+1]?"done":""}" data-open="${i+1}" type="button"><span><span class="num">МИССИЯ ${String(i+1).padStart(2,"0")}</span><h3>${esc(l.title)}</h3><p>${esc(l.focus)}</p></span><span class="status">${state.done[i+1]?"DONE ✓":"30 MIN · CORE ROUTE"}</span></button>`).join("");
+ const names=["Sound Detective","Vowel Volcano","Digraph Dungeon","Blend Racetrack","Magic-E Lab","Pattern Port","Sound Islands","Reader HQ"];
+ const icons=["🔎","🌋","🏰","🏎️","✨","⚓","🏝️","🏆"];
+ g.innerHTML=LESSONS.map((l,i)=>`<button class="mission ${state.done[i+1]?"done":""}" data-open="${i+1}" type="button"><span><span class="quest-icon">${icons[i]}</span><span class="num">LEVEL ${i+1}</span><h3>${names[i]}</h3><p>${esc(l.focus)}</p></span><span class="status">${state.done[i+1]?"🏆 COMPLETED":"START QUEST →"}</span></button>`).join("");
  g.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openLesson(+b.dataset.open));
 }
 function openLesson(n){currentLesson=n;currentStage=0;location.hash="lesson-"+n;save();renderLesson();document.getElementById("workspace").scrollIntoView({behavior:"smooth",block:"start"})}
-function completeStage(){state.stages[sk(currentLesson,currentStage)]=true;if(currentStage===5)state.done[currentLesson]=true;if(currentStage<5)currentStage++;save();renderLesson()}
-function tutor(text){return `<div class="tutor-note ${tutorMode?"show":""}"><b>Teacher note</b><br>${text}</div>`}
+function completeStage(){
+ state.stages[sk(currentLesson,currentStage)]=true;
+ if(currentStage===5){state.done[currentLesson]=true;save();renderLesson();showReward();return}
+ currentStage++;save();renderLesson();
+}
+function tutor(text){return `<div class="tutor-note ${tutorMode?"show":""}"><b>🔒 Для учителя</b><br>${text}</div>`}
+function questName(n){return ["Sound Detective","Vowel Volcano","Digraph Dungeon","Blend Racetrack","Magic-E Lab","Pattern Port","Sound Islands","Reader HQ"][n-1]}
+function showReward(){
+ const w=document.getElementById("workspace"),all=Object.values(state.done||{}).filter(Boolean).length;
+ const final=all===LESSONS.length;
+ w.innerHTML=`<div class="reward-screen" role="status"><div class="reward-burst">${final?"🏆":"🎁"}</div><div class="reward-eyebrow">${final?"FINAL REWARD":"QUEST COMPLETE"}</div><h2>${final?"YOU ARE A READING HERO!":"LEVEL "+currentLesson+" COMPLETE!"}</h2><p>${final?"Ты прошёл все 8 квестов и собрал Reading Academy Badge!":"Ты открыл новый кусочек секретного кода чтения."}</p><div class="reward-badge">${final?"🌟 READING HERO 🌟":"⭐ SOUND STAR #"+currentLesson+" ⭐"}</div><div class="reward-actions"><button class="btn primary" id="rewardAgain" type="button">🎮 Сыграть ещё</button>${currentLesson<LESSONS.length?`<button class="btn yellow" id="rewardNext" type="button">🔓 Открыть LEVEL ${currentLesson+1}</button>`:""}</div><div class="keks-reward">🐾 <b>Кекс:</b> ${final?"«Вот это да! Теперь ты читаешь код по-настоящему!»":"«Мяу! Этот код наш. Что там в следующем уровне?»"}</div></div>`;
+ document.getElementById("rewardAgain").onclick=()=>{currentStage=3;renderLesson()};
+ const n=document.getElementById("rewardNext");if(n)n.onclick=()=>openLesson(currentLesson+1);
+}
 function frame(title,lead,body,note,extra=""){
  const s=STAGES[currentStage];
  return `<div class="stage-kicker">${s.game?"🎮 ":""}${s.name} · ${s.mins} мин</div>
@@ -35,7 +49,7 @@ function frame(title,lead,body,note,extra=""){
 function renderLesson(){
  const l=LESSONS[currentLesson-1],w=document.getElementById("workspace");
  const stars=STAGES.filter((s,i)=>state.stages[sk(currentLesson,i)]).length;
- w.innerHTML=`<div class="lesson-shell"><div class="lesson-hero kids-hero"><div><div class="lesson-no">LEVEL ${currentLesson} · ⭐ ${stars}/6</div><h2>${esc(l.title)}</h2><p class="kid-goal">Сегодня научимся: ${esc(l.focus)}</p></div><div class="timebox"><strong>30</strong>мин</div></div><div class="stage-nav">${STAGES.map((s,i)=>`<button class="stage-tab ${i===currentStage?"active":""} ${state.stages[sk(currentLesson,i)]?"done":""}" data-stage="${i}" type="button"><span class="stage-emoji">${["👀","👂","🧩","🎮","📚","🔐"][i]}</span>${s.name}<br><small>${s.mins} мин</small></button>`).join("")}</div><div class="stage-body" id="stageBody"></div></div>`;
+ w.innerHTML=`<div class="quest-strip"><span>🗺️ READING QUEST</span><b>${questName(currentLesson)}</b><span>LEVEL ${currentLesson}/8</span></div><div class="lesson-shell"><div class="lesson-hero kids-hero"><div><div class="lesson-no">LEVEL ${currentLesson} · ⭐ ${stars}/6</div><h2>${esc(l.title)}</h2><p class="kid-goal">Сегодня научимся: ${esc(l.focus)}</p></div><div class="timebox"><strong>30</strong>мин</div></div><div class="stage-nav">${STAGES.map((s,i)=>`<button class="stage-tab ${i===currentStage?"active":""} ${state.stages[sk(currentLesson,i)]?"done":""}" data-stage="${i}" type="button"><span class="stage-emoji">${["👀","👂","🧩","🎮","📚","🔐"][i]}</span>${s.name}<br><small>${s.mins} мин</small></button>`).join("")}</div><div class="stage-body" id="stageBody"></div></div>`;
  w.querySelectorAll("[data-stage]").forEach(b=>b.onclick=()=>{currentStage=+b.dataset.stage;renderLesson()});renderStage();
 }
 function renderStage(){
@@ -97,7 +111,7 @@ function wireRead(l){
  document.querySelectorAll("[data-wordpick]").forEach(b=>b.onclick=()=>{if(!selectedPic){fb.textContent="Сначала выбери картинку 👆";return}if(b.dataset.wordpick===selectedPic.dataset.vocab){selectedPic.classList.remove("selected");selectedPic.classList.add("matched");b.classList.add("matched");b.disabled=true;found.add(b.dataset.wordpick);fb.textContent=found.size===(l.vocab||[]).length?"Все пары собраны! 🏆":"Есть пара! ⭐ Прочитай слово." ;selectedPic=null}else{b.classList.add("wrong");setTimeout(()=>b.classList.remove("wrong"),500);fb.textContent="Почти! Прочитай ещё раз."}});
 }
 function exit(l){
- const body=`<div class="game-banner"><span class="game-badge">GAME 2 / 2</span><div><b>Mystery Word Vault · Сейф слова</b><small>Увидел → спрятал → восстановил. Retrieval + spelling, не скорость.</small></div><span class="game-skill">RECALL</span></div><div class="activity-grid"><div class="flash"><div class="eyebrow">2 секунды → спрятать → написать</div><p>Посмотри на слово. Когда оно исчезнет, восстанови его по памяти.</p><div class="flash-display" id="flashDisplay">готов?</div><button class="btn yellow" id="flashStart" type="button">Показать mystery word</button><div style="margin-top:10px"><label class="sr-only" for="flashInput">Напиши слово</label><input id="flashInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="напиши слово"><button class="btn" id="flashCheck" type="button">Проверить</button></div><div class="feedback" id="flashFeedback"></div></div><div class="card blue"><h4>Exit ticket</h4><p>Прочитай учителю одно любимое слово и одну строку из текста.</p><p><b>Как ощущалось чтение?</b></p><div class="confidence"><button data-confidence="1" type="button">Нужна помощь</button><button data-confidence="2" type="button">В основном получается</button><button data-confidence="3" type="button">Могу сам(а)</button></div><p id="confidenceText" class="feedback"></p></div></div>`;
+ const body=`<div class="game-banner"><span class="game-badge">🔐 FINAL BOSS</span><div><b>Mystery Word Vault</b><small>Открой сейф: запомни слово и восстанови его!</small></div><span class="game-skill">🎁 PRIZE</span></div><div class="activity-grid"><div class="flash"><div class="eyebrow">2 секунды → спрятать → написать</div><p>Посмотри на слово. Когда оно исчезнет, восстанови его по памяти.</p><div class="flash-display" id="flashDisplay">готов?</div><button class="btn yellow" id="flashStart" type="button">Показать mystery word</button><div style="margin-top:10px"><label class="sr-only" for="flashInput">Напиши слово</label><input id="flashInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="напиши слово"><button class="btn" id="flashCheck" type="button">Проверить</button></div><div class="feedback" id="flashFeedback"></div></div><div class="card blue"><h4>🏁 Последний шаг</h4><p>Прочитай учителю любимое слово и одну строчку. Потом забирай награду!</p><p><b>Как было?</b></p><div class="confidence"><button data-confidence="1" type="button">🧩 Ещё потренируюсь</button><button data-confidence="2" type="button">⭐ Получается!</button><button data-confidence="3" type="button">🚀 Я могу!</button></div><p id="confidenceText" class="feedback"></p></div></div>`;
  return frame("Секретное слово 🔐","Посмотри. Запомни. Напечатай!",body,"Для более сильной phonics–spelling связи можно не показывать слово, а произнести его. Ребёнок сегментирует звуки и записывает spelling.",l.extra);
 }
 function wireExit(l){
